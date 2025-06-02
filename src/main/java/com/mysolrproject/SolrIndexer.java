@@ -9,8 +9,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
+import static com.mysolrproject.Constants.*;
+
+
 public class SolrIndexer {
-    private static final String SOLR_URL = "http://localhost:8983/solr/oracle-core";
+
 
     public static void main(String[] args) {
         System.out.println("Starting SolrIndexer...");
@@ -18,8 +21,8 @@ public class SolrIndexer {
             System.out.println("SolrClient initialized with URL: " + SOLR_URL);
             try (Connection conn = OracleDBConnector.getConnection();
                  Statement stmt = conn.createStatement()) {
-                System.out.println("Executing query: SELECT * FROM SIEBEL.S_EVT_ACT act WHERE act.CREATED >= TO_DATE('04/01/2025 00:00:00','MM/DD/YYYY HH24:MI:SS')");
-                ResultSet rs = stmt.executeQuery("SELECT * FROM SIEBEL.S_EVT_ACT act WHERE act.CREATED >= TO_DATE('04/01/2025 00:00:00','MM/DD/YYYY HH24:MI:SS')");
+                System.out.println(SEARCHABLE_TASK_QUERY);
+                ResultSet rs = stmt.executeQuery(SEARCHABLE_TASK_QUERY);
                 System.out.println("Query executed successfully.");
 
                 ResultSetMetaData metaData = rs.getMetaData();
