@@ -1,7 +1,15 @@
-package com.mysolrproject;
+package com.mysolrproject.constants;
 
-public class Constants {
-    static final String SOLR_URL = "http://localhost:8983/solr/oracle-core";
+public final class Constants {
+
+    private Constants() {}
+
+    /** Default Solr base URL (overridden by solr.url in application.properties). */
+    public static final String SOLR_URL_DEFAULT = "http://localhost:8983/solr/oracle-core";
+
+    /** Number of rows to fetch per page from Oracle (OFFSET/FETCH). Use for large result sets (e.g. 1M+). */
+    public static final int FETCH_PAGE_SIZE = 500;
+
     public static final String SEARCHABLE_TASK_QUERY = "SELECT DISTINCT\n" +
             "ACT.ROW_ID,\n" +
             "PAM.X_ATTRIB_12 AS PAMGrp,\n" +
